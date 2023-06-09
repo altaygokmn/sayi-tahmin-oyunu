@@ -1,56 +1,54 @@
 'use strict';
+
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highScore = 0;
+let attempts = 0;
 
-const displayMessage = function(message){
-    document.querySelector('.message').textContent = message;
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
 };
-document.querySelector('.check').addEventListener('click', function(){
 
-const guess = Number(document.querySelector('.guess').value);
-console.log(guess,typeof guess);
-console.log(secretNumber, typeof secretNumber)
+document.querySelector('.check').addEventListener('click', function () {
+  const guess = Number(document.querySelector('.guess').value);
 
-// input boş girilirse
-
-if(!guess){
-    displayMessage('Bir sayı giriniz!')
-}
-// kazanma halinde
-else if(guess === secretNumber){
+  if (!guess) {
+    displayMessage('Bir sayı giriniz!');
+  } else if (guess === secretNumber) {
     displayMessage('Doğru Tahmin!');
     document.querySelector('.number').textContent = secretNumber;
-
     document.querySelector('.number').style.color = '#60b347';
 
-    if(score > highScore){
-        highScore = score;
-        document.querySelector('.highscore').textContent = highscore;
-
+    if (score > highScore) {
+      highScore = score;
+      document.querySelector('.highscore-value').textContent = highScore;
     }
-}
-
-// sayıların eşleşmeme durumunda
-else if(guess!== secretNumber){
-    if(score > 1){
-        displayMessage(guess<secretNumber ? 'Tahmininiz sayıdan düşük.':'Tahmininiz sayıdan yüksek.');
-        document.querySelector('.score').textContent = score;
+  } else if (guess !== secretNumber) {
+    if (score > 1) {
+      displayMessage(guess < secretNumber ? 'Tahmininiz sayıdan düşük.' : 'Tahmininiz sayıdan yüksek.');
+      document.querySelector('.score-value').textContent = --score;
+    } else {
+      displayMessage('Oyunu kaybettiniz.');
+      document.querySelector('.score-value').textContent = 0;
     }
-    else{
-        displayMessage('Oyunu kaybettiniz.');
-        document.querySelector('.score').textContent = 0;
-    }
-}
+  }
 
+  attempts++;
 });
-document.querySelector('.again').addEventListener('click',function(){
-    score = 20;
-    secretNumber = Math.trunc(Math.random() * 20) + 1;
-    displayMessage('Hadi yeniden başlayalım!');
-    document.getElementById("numberId").innerHTML = "?";
-    document.querySelector('.number').style.color = '#ccc';
-    document.querySelector('.guess').textContent = '';
-    document.querySelector('.number').style.color = '#333';
-    document.querySelector('.number').style.width = '15rem';
+
+document.querySelector('.again').addEventListener('click', function () {
+  score = 20;
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  attempts = 0;
+
+  displayMessage('Hadi yeniden başlayalım!');
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('.number').style.color = '#333';
+  document.querySelector('.guess').value = '';
+  document.querySelector('.score-value').textContent = score;
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelector('.score-value').textContent = score;
+  document.querySelector('.highscore-value').textContent = highScore;
 });

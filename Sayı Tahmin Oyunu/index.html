@@ -10,26 +10,25 @@
 </head>
 <body>
     <header>
-                <h1>Sayıyı tahmin et!</h1>
-                 <p class="between">1-20 arasında bir sayı tahmin ediniz.</p>
-                 <button class="btn again">Tekrar dene!</button>
-                 <div class="number" id="numberId">?</div>
+        <h1>Sayıyı tahmin et!</h1>
+        <p class="between">1-20 arasında bir sayı tahmin ediniz.</p>
+        <button class="btn again">Tekrar dene!</button>
+        <div class="number" id="numberId">?</div>
     </header>
 
     <main>
-            <section class="left">
-                <input class="guess" type="number">
-                <button class="btn check">Kontrol et!</button>
-            </section>
+        <section class="left">
+            <input class="guess" type="number">
+            <button class="btn check">Kontrol et!</button>
+        </section>
 
-            <section class="right">
-                <p class="message">Başlayalım !</p>
-
-            </section>
-
+        <section class="center">
+            <p class="message">Başlayalım !</p>
+            <p class="score">Skor: <span class="score-value">0</span></p>
+            <p class="highscore">En İyi Skor: <span class="highscore-value">0</span></p>
+        </section>
     </main>
-    <script src="script.js">
-        scr = score;
-    </script>
+
+    <script src="script.js"></script>
 </body>
 </html>
